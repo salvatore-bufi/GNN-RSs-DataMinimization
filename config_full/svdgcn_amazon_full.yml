@@ -1,0 +1,41 @@
+experiment:
+  backend: pytorch
+  data_config:
+    strategy: fixed
+    train_path: ../data/amazon-book/train.tsv
+    validation_path: ../data/amazon-book/val.tsv
+    test_path: ../data/amazon-book/test.tsv
+  dataset: amazonbook_full
+  top_k: 20
+  evaluation:
+    cutoffs: [20]
+    simple_metrics: [nDCGRendle2020, Recall]
+  gpu: 1
+  external_models_path: ../external/models/__init__.py
+  models:
+    external.SVDGCN:
+      meta:
+        hyper_opt_alg: tpe
+        hyper_max_evals: 10
+        verbose: True
+        save_weights: False
+        validation_rate: 10
+        validation_metric: Recall@20
+        restore: False
+        write_best_iterations: True
+      factors: 64
+      epochs: 1000
+      batch_size: 1024
+      l_w: [loguniform, -13.815510558, -4.60517018599]
+      lr: [loguniform, 1.6094379124341, 2.302585092994]
+      req_vec: [choice, [20, 30, 60, 90]]
+      beta: [choice, [2.0, 3.0]]
+      alpha: [choice, [2.0, 3.0]]
+      coef_u: 0.5
+      coef_i: [choice, [0.7, 0.9]]
+      seed: 123
+      early_stopping:
+        patience: 10
+        mode: auto
+        monitor: Recall@20
+        verbose: True

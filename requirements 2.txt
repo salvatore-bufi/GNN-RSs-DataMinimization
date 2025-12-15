@@ -1,0 +1,12 @@
+hyperopt==0.2.5
+numpy==1.24.3
+pandas==1.1.5
+tensorflow==2.13.1
+torch==2.1.2
+tqdm
+scipy
+Pillow
+PyYAML
+scikit_learn
+dgl
+torch_geometric

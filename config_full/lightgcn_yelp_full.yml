@@ -1,0 +1,38 @@
+experiment:
+  backend: pytorch
+  data_config:
+    strategy: fixed
+    train_path: ../data/yelp/train.tsv
+    validation_path: ../data/yelp/val.tsv
+    test_path: ../data/yelp/test.tsv
+  dataset: yelp_full
+  top_k: 20
+  evaluation:
+    cutoffs: [20]
+    simple_metrics: [nDCGRendle2020, Recall]
+  gpu: 1
+  external_models_path: ../external/models/__init__.py
+  models:
+    external.LightGCN:
+      meta:
+        hyper_opt_alg: tpe
+        hyper_max_evals: 10
+        verbose: True
+        save_weights: False
+        validation_rate: 10
+        validation_metric: Recall@20
+        restore: False
+        write_best_iterations: True
+      lr: [loguniform, -9.2103403719762, -4.6051701859881]
+      epochs: 1000
+      factors: [ 64 ]
+      batch_size: 1024
+      l_w: [loguniform, -13.815510558, -4.60517018599]
+      n_layers: [choice, [2, 3]]
+      normalize: True
+      seed: 123
+      early_stopping:
+        patience: 10
+        mode: auto
+        monitor: Recall@20
+        verbose: True

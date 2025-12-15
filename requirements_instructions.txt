@@ -1,0 +1,16 @@
+TO install environment:
+
+1) install the conda environment
+conda env create -f environment.yml -n NAME_you_want_for_environment
+
+2) install separately torch_geometric
+pip install torch_geometric
+
+3) Install other torch geometric libraries accordingly to torch version
+import torch
+torch.__version__
+e.g.:
+pip install pyg_lib torch_scatter torch_sparse torch_cluster torch_spline_conv -f https://data.pyg.org/whl/torch-2.8.0+cu126.html
+
+python -m pip install pyg_lib torch_scatter torch_sparse torch_cluster torch_spline_conv \
+  -f https://data.pyg.org/whl/torch-2.1.2+cu121.html
