@@ -1,4 +1,4 @@
-# Legal but Unfair: Auditing the Impact of Data Minimization on Fairness and Accuracy Trade-off in Recommender Systems
+# Resilience and Effectiveness of GNN-based Recommender Systems under Data Minimization
 
 ## Table of Contents
 
@@ -10,24 +10,6 @@
 - [Usage](#usage)
   - [Reproduce Paper Results](#reproduce-paper-results)
 
-
-
-## Description
-
-The code in this repository allows replicating the experimental setting described within the paper.
-
-The recommenders training and evaluation procedures have been developed on the reproducibility framework **Elliot**,
-so we suggest you refer to the official GitHub 
-[page](https://github.com/sisinflab/elliot) and 
-[documentation](https://elliot.readthedocs.io/en/latest/).
-
-Regarding the graph-based recommendation models based on torch, they have been implemented
-in `PyTorch Geometric`, with `PyTorch` `2.1.2` and CUDA `12.1`.
-
-For granting the usage of the same environment on different machines, 
-all the experiments have been executed on the same docker container.
-If the reader would like to use it, 
-please look at the corresponding section in [requirements](#requirements).
 
 ## Requirements 
 
@@ -52,37 +34,33 @@ $ pip install -r requirements.txt
 $ pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-2.1.2+cu121.html
 ```
 
+## Model Training and Evaluation
 
-## Datasets
+The code in this repository allows replicating the experimental setting described within the paper.
 
-At `./data/` you may find all the [files](data) related to 
-the datasets
+The recommenders training and evaluation procedures have been developed on the reproducibility framework **Elliot**,
+so we suggest you refer to the official GitHub 
+[page](https://github.com/sisinflab/elliot) and 
+[documentation](https://elliot.readthedocs.io/en/latest/).
 
-The datasets could be found within the directory `./data/[DATASET]/`. 
+Regarding the graph-based recommendation models based on torch, they have been implemented
+in `PyTorch Geometric`, with `PyTorch` `2.1.2` and CUDA `12.1`.
 
+For your convenience, we provide the files containing each model performance at `./data/` when they are trained with minimized dataset and subsampled dataset.
 
-## Recommendation Lists
+## Regression Training
 
-The best models recommendation lists could be found at `./results/[DATASET]_[MINIMIZATION_STRATEGY]_[n]/recs` once the experiments have been completed.
-You may be use them for computing the recommendation metrics.
+At `./data/` you will find containing each model performance when they are trained with minimized dataset and subsampled dataset. These files contain also the dataset characterisitcs.
 
-
-## Usage
-
-Here we describe the steps to reproduce the results presented in the paper. 
-Furthermore, we provide a description of how the experiments have been configured.
-
-### Reproduce Paper Results
-
-[Here](run_experiments.py) you can find a ready-to-run Python file with all the pre-configured experiments cited in our paper.
-You can easily run them with the following command:
+To train the regression and gather the paper result, you may run the following commands for the data minimization and subsamples scenarios, respectively.
 
 ```
-python run_experiments.py
+python regression_minimzation.py
 ```
 
-It reproduces all experimental results from our paper. The script implements all baseline models across both datasets, testing each minimization strategy and interaction number combination.
-The results will be stored in the folder ```results/[DATASET]_[MINIMIZATION_STRATEGY]_[n]```.
+```
+python regression_subsample.py
+```
 
 
 
