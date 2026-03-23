@@ -3,6 +3,7 @@ import argparse
 from elliot.run import run_experiment
 import runtimes_config.config_expsampled_amazon as amz_template
 import runtimes_config.config_expsampled_yelp as yelp_template
+import runtimes_config.config_expsampled_amazonsw as amzsw_template
 
 ### TEMPLATES
 TEMPLATES_AMAZON = {
@@ -11,10 +12,10 @@ TEMPLATES_AMAZON = {
     'UltraGCN': amz_template.TEMPLATE_ULTRAGCN,
     'LightGCN': amz_template.TEMPLATE_LIGHTGCN,
     'SimpleX': amz_template.TEMPLATE_SIMPLEX,
-    'SVDGCN': amz_template.TEMPLATE_SVDGCN,
     'UserKNN': amz_template.TEMPLATE_USERKNN,
     'ItemKNN': amz_template.TEMPLATE_ITEMKNN,
-    'GFCF': amz_template.TEMPLATE_GFCF
+    'GFCF': amz_template.TEMPLATE_GFCF,
+    'DGCF': amz_template.TEMPLATE_DGCF
 }
 
 TEMPLATES_YELP = {
@@ -23,19 +24,30 @@ TEMPLATES_YELP = {
     'UltraGCN': yelp_template.TEMPLATE_ULTRAGCN,
     'LightGCN': yelp_template.TEMPLATE_LIGHTGCN,
     'SimpleX': yelp_template.TEMPLATE_SIMPLEX,
-    'SVDGCN': yelp_template.TEMPLATE_SVDGCN,
     'UserKNN': yelp_template.TEMPLATE_USERKNN,
     'ItemKNN': yelp_template.TEMPLATE_ITEMKNN,
     'GFCF': yelp_template.TEMPLATE_GFCF
 }
 
-TEMPLATES = {'amazon-book': TEMPLATES_AMAZON, 'yelp': TEMPLATES_YELP}
+TEMPLATES_AMAZONSW = {
+    'BPRMF': amzsw_template.TEMPLATE_BPR,
+    'DirectAU': amzsw_template.TEMPLATE_DIRECTAU,
+    'UltraGCN': amzsw_template.TEMPLATE_ULTRAGCN,
+    'LightGCN': amzsw_template.TEMPLATE_LIGHTGCN,
+    'SimpleX': amzsw_template.TEMPLATE_SIMPLEX,
+    'UserKNN': amzsw_template.TEMPLATE_USERKNN,
+    'ItemKNN': amzsw_template.TEMPLATE_ITEMKNN,
+    'GFCF': amzsw_template.TEMPLATE_GFCF,
+    'DGCF': amzsw_template.TEMPLATE_DGCF
+}
+
+TEMPLATES = {'amazon-book': TEMPLATES_AMAZON, 'yelp': TEMPLATES_YELP, 'amazon-software': TEMPLATES_AMAZONSW}
 
 # Default lists
 DEFAULT_DATASETS = ['yelp', 'amazon-book']
 DEFAULT_STRATEGIES = ['edge-dropout', 'node-dropout']
 DEFAULT_RANGE = (0, 900)
-DEFAULT_MODELS = ['UltraGCN', 'LightGCN', 'GFCF']
+DEFAULT_MODELS = ['UltraGCN', 'LightGCN', 'GFCF', 'DGCF']
 
 CONFIG_DIR = './config_files'
 

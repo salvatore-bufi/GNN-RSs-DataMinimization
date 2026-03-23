@@ -15,8 +15,8 @@ parser.add_argument('--end_id', type=int, default=900)
 parser.add_argument('--characteristics', type=str, nargs='+', default=ALL_ACCEPTED_CHARACTERISTICS_SUB)
 args = parser.parse_args()
 
-RESULTS = pd.read_csv('data/samples_all_performances_with_characteristics.tsv', sep='\t')
-MODELS = ['LightGCN', 'UltraGCN', 'GFCF']
+RESULTS = pd.read_csv('data/samples_all_performances_with_characteristics_complete.tsv', sep='\t')
+MODELS = ['LightGCN', 'UltraGCN', 'GFCF', 'DGCF']
 DATASETS = ['amazon-book', 'yelp']
 metrics = ['Recall']
 all_rows = []

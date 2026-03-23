@@ -321,3 +321,43 @@ TEMPLATE_GFCF = """experiment:
       alpha: 0.27926506534762485
       seed: 123
 """
+
+TEMPLATE_DGCF = """experiment:
+  backend: pytorch
+  data_config:
+    strategy: fixed
+    train_path: ../dataset/{dataset}/{strategy}/{interactions_numb}.tsv
+    validation_path: ../data/{dataset}/val.tsv
+    test_path: ../data/{dataset}/test.tsv
+  dataset: {dataset_name}
+  top_k: 20
+  evaluation:
+    cutoffs: [20]
+    simple_metrics: [nDCGRendle2020, Recall]
+  gpu: {gpu_id}
+  external_models_path: ../external/models/__init__.py
+  models:
+    external.DGCF:
+      meta:
+        verbose: True
+        save_weights: False
+        validation_rate: 10
+        validation_metric: Recall@20
+        restore: False
+        write_best_iterations: True
+      lr: 0.0011804184702263693
+      epochs: 1000
+      factors: 64 
+      batch_size: 1024
+      l_w_bpr: 0.00035562834787914794
+      l_w_ind: 0.00035562834787914794
+      n_layers: 2
+      intents: 4
+      normalize: True
+      seed: 123
+      early_stopping:
+        patience: 10
+        mode: auto
+        monitor: Recall@20
+        verbose: True
+"""

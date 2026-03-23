@@ -16,7 +16,12 @@ parser.add_argument('--end_id', type=int, default=900)
 parser.add_argument('--characteristics', type=str, nargs='+', default=ALL_ACCEPTED_CHARACTERISTICS_MIN)
 args = parser.parse_args()
 
-results = pd.read_csv('data/minimized_dataset_all_performances_with_characteristics.tsv', sep='\t')
+if args.dataset =='yelp':
+    results = pd.read_csv('data/minimized_dataset_all_performances_with_characteristics.tsv', sep='\t')
+elif args.dataset =='amazon-book':
+    results = pd.read_csv('data/final_enriched_results_book.tsv', sep='\t')
+else:
+    results = pd.read_csv('data/final_enriched_results_sw.tsv', sep='\t')
 results = results[results['dataset_name'] == args.dataset]
 
 characteristics = args.characteristics
